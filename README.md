@@ -49,7 +49,7 @@ sudo reboot
 | `/etc/initramfs-tools/hooks/edid` | initramfs-tools 램디스크에 EDID 포함 (있을 때) |
 | `/etc/default/grub` | 커널 파라미터 `drm.edid_firmware=eDP-1:edid/gb4p_custom_edid.bin` 추가 (`.bak.<시각>` 백업 생성), `update-grub` 실행 |
 
-요구 사항: `grub2`, `dracut` 또는 `initramfs-tools`, root 권한. Ubuntu 22.04 / 24.04 / 26.04에서 쓰던 스크립트이며 Wayland·X11 모두 상관없습니다. 확인 환경은 Ubuntu 26.04 (kernel 7.0), i915입니다.
+요구 사항: `grub2`, `dracut` 또는 `initramfs-tools`, root 권한. dracut(Ubuntu 26.04+)과 initramfs-tools(22.04/24.04) 양쪽을 처리하도록 썼지만, 실제로 확인한 환경은 Ubuntu 26.04 (kernel 7.0, i915, GNOME Wayland)뿐입니다.
 
 ## 확인
 
@@ -82,7 +82,3 @@ python3 generate-edid.py [입력_edid] [출력_bin]
 ```
 
 다른 패널은 픽셀 클럭과 H/V 타이밍이 다르므로 스크립트 안의 `pclk_fixed`, 블랭킹 값, 해상도를 직접 맞춰야 합니다. 검증하지 않은 값을 쓰면 블랙아웃이 날 수 있습니다.
-
-## 관련
-
-* 전원(AC/배터리)에 따라 주사율을 자동 전환하고 `sdr-native`를 유지하는 데몬은 이 레포가 아니라 [GB4P_ubuntu_my_preferences](https://github.com/hajunlee213/GB4P_ubuntu_my_preferences)의 `power_refresh_sdr.sh`에 있습니다.
